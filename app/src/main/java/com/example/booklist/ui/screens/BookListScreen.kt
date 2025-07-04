@@ -1,40 +1,35 @@
 package com.example.booklist.ui.screens
 
-import Book
 import BookViewModel
-import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import android.content.Intent
+import com.example.booklist.R
+import com.example.booklist.data.Book
 
-@SuppressLint("StateFlowValueCalledInComposition")
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookListScreen(
     viewModel: BookViewModel,
-    onAddBook: () -> Unit
+    onAddBook: () -> Unit,
+    onEditBook: (Book) -> Unit
 ) {
-    val books = viewModel.books.value
+    val books by viewModel.books.collectAsState()
     val context = LocalContext.current
+    var showDialog by remember { mutableStateOf(false) }
+    var bookToRemove by remember { mutableStateOf<Book?>(null) }
 
     Column(
         modifier = Modifier
@@ -47,85 +42,170 @@ fun BookListScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "My Books",
+                text = stringResource(R.string.my_books),
                 style = MaterialTheme.typography.headlineMedium
             )
 
-            Button(onClick = onAddBook) {
-                Icon(Icons.Default.Add, contentDescription = "Add")
-                Text("Add Book")
+            Button(
+                onClick = onAddBook,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            ) {
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.add))
+                Text(stringResource(R.string.add_book))
             }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Total books: ${books.size}",
-            style = MaterialTheme.typography.bodyLarge
+            text = stringResource(R.string.total_books, books.size),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
         LazyColumn(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(books) { book ->
+            items(books, key = { it.id }) { book ->
                 BookItem(
                     book = book,
-                    onRemove = { viewModel.removeBook(book) },
+                    onEdit = { onEditBook(book) },
+                    onRemove = {
+                        bookToRemove = book
+                        showDialog = true
+                    },
                     onShare = {
-                        val intent = Intent().apply {
-                            action = Intent.ACTION_SEND
-                            putExtra(
-                                Intent.EXTRA_TEXT,
-                                "Check out this book: ${book.title} by ${book.author}"
-                            )
+                        val shareMessage = context.getString(
+                            R.string.share_book_message,
+                            book.title,
+                            book.author
+                        )
+                        Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
+                            putExtra(Intent.EXTRA_TEXT, shareMessage)
+                            context.startActivity(
+                                Intent.createChooser(
+                                    this,
+                                    context.getString(R.string.share_book)
+                                )
+                            )
                         }
-                        context.startActivity(Intent.createChooser(intent, "Share book"))
                     }
                 )
-                Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text(stringResource(R.string.confirm_removal)) },
+            text = {
+                Text(
+                    stringResource(
+                        R.string.are_you_sure_remove_book,
+                        bookToRemove?.title ?: ""
+                    )
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        bookToRemove?.let { viewModel.removeBook(it) }
+                        showDialog = false
+                    }
+                ) {
+                    Text(stringResource(R.string.remove))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { showDialog = false }
+                ) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
+    }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookItem(
     book: Book,
+    onEdit: () -> Unit,
     onRemove: () -> Unit,
     onShare: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        shape = MaterialTheme.shapes.medium
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
                 text = book.title,
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                text = "by ${book.author}",
-                style = MaterialTheme.typography.bodyMedium
+                text = stringResource(R.string.by_author, book.author),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             Row(
                 horizontalArrangement = Arrangement.End,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Button(
+                TextButton(
                     onClick = onShare,
-                    modifier = Modifier.padding(end = 8.dp)
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.primary
+                    )
                 ) {
-                    Text("Share")
+                    Text(stringResource(R.string.share))
                 }
-                Button(onClick = onRemove) {
-                    Text("Remove")
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                TextButton(
+                    onClick = onEdit,
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.secondary
+                    )
+                ) {
+                    Icon(
+                        Icons.Default.Edit,
+                        contentDescription = stringResource(R.string.edit)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(stringResource(R.string.edit))
+                }
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                TextButton(
+                    onClick = onRemove,
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Text(stringResource(R.string.remove))
                 }
             }
         }
