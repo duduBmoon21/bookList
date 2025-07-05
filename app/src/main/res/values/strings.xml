@@ -1,8 +1,8 @@
 <resources>
     <!-- App name and main screen -->
-    <string name="app_name">BookList</string>
+    <string name="app_name">WTM-BookList</string>
     <string name="my_books">My Books</string>
-    <string name="total_books">Total books: %d</string>
+    <string name="total_books">Total books</string>
 
     <!-- Add book screen -->
     <string name="add_book">Add Book</string>
