@@ -1,24 +1,20 @@
 # 📚 BookList - Native Android Development (Kotlin & Jetpack Compose) – Workshop Assignment
 
-A sleek, modern Android application built with Jetpack Compose for tracking your book collection with beautiful Material 3 design.
-
-![App Screenshot](https://github.com/duduBmoon21/bookList/blob/main/static/cover.png?raw=true)
+A Modern Android application built with Jetpack Compose for book collection with beautiful Material 3 design.
 
 ## ✨ Features
 
-* **Material You Design** - Dynamic colors, adaptive theming, and modern UI components
+* **Material Design** - Dynamic colors, adaptive theming, and modern UI components
 * **Intuitive Book Management** - Add, edit, and remove books with ease
-* **Beautiful Animations** - Smooth transitions and interactive elements
 * **Modern Architecture** - Built with MVVM pattern and Jetpack components
 * **Dark/Light Theme** - Automatic system theme adaptation
 
 ## 💠 Technologies
 
-* 100% Kotlin
+* Kotlin
 * Jetpack Compose
 * Material Design 3
 * ViewModel & StateFlow
-* Room Database *(optional - if implemented)*
 
 ## 🎨 UI/UX Highlights
 
