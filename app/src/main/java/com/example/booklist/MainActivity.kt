@@ -1,5 +1,6 @@
 package com.example.booklist
 
+import BookViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,12 +20,13 @@ import com.example.booklist.ui.screens.AddBookScreen
 import com.example.booklist.ui.screens.BookListScreen
 import com.example.booklist.ui.screens.EditBookScreen
 import com.example.booklist.ui.theme.BookListTheme
-import BookViewModel
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BookListTheme {
+                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -37,8 +39,8 @@ class MainActivity : ComponentActivity() {
 }
 
 sealed class Screen {
-    data object List : Screen()
-    data object Add : Screen()
+    object List : Screen()
+    object Add : Screen()
     data class Edit(val book: Book) : Screen()
 }
 
@@ -62,18 +64,15 @@ fun BookListApp() {
             onBack = { currentScreen = Screen.List }
         )
 
-        is Screen.Edit -> {
-            EditBookScreen(
-                book = screen.book,
-                viewModel = viewModel,
-                onSave = {
-                    viewModel.updateBook()
-                    currentScreen = Screen.List
-                },
-                onBack = { currentScreen = Screen.List }
-            )
-        }
-
+        is Screen.Edit -> EditBookScreen(
+            book = screen.book,
+            viewModel = viewModel,
+            onSave = {
+                viewModel.updateBook()
+                currentScreen = Screen.List
+            },
+            onBack = { currentScreen = Screen.List }
+        )
     }
 }
 

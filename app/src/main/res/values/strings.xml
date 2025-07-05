@@ -1,28 +1,38 @@
 <resources>
-    <!-- Existing strings -->
+    <!-- App name and main screen -->
     <string name="app_name">BookList</string>
     <string name="my_books">My Books</string>
-    <string name="add_book">Add Book</string>
+    <string name="total_books">Total books: %d</string>
 
+    <!-- Add book screen -->
+    <string name="add_book">Add Book</string>
     <string name="add_new_book">Add New Book</string>
     <string name="book_title">Book Title</string>
     <string name="author_name">Author Name</string>
-
-
-    <string name="edit_book">Edit Book</string>
-    <string name="total_books">Total books: %d</string>
-    <string name="share">Share</string>
-    <string name="edit">Edit</string>
-    <string name="remove">Remove</string>
-    <string name="confirm_removal">Confirm Removal</string>
-    <string name="are_you_sure_remove_book">Are you sure you want to remove \"%s\"?</string>
-    <string name="cancel">Cancel</string>
     <string name="add">Add</string>
-    <string name="back">Back</string>
+
+    <!-- Edit book screen -->
+    <string name="edit_book">Edit Book</string>
     <string name="title">Title</string>
     <string name="author">Author</string>
     <string name="save">Save</string>
+
+    <!-- Common actions -->
+    <string name="back">Back</string>
+    <string name="share">Share</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
+
+    <!-- Book item display -->
     <string name="by_author">by %s</string>
+
+    <!-- Sharing -->
     <string name="share_book">Share book</string>
     <string name="share_book_message">Check out this book: %1$s by %2$s</string>
+
+    <!-- Confirmation dialog -->
+    <string name="confirm_removal">Confirm Removal</string>
+    <string name="are_you_sure_remove_book">Are you sure you want to remove \"%s\"?</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_books">No of Books</string>
 </resources>

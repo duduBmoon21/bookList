@@ -9,72 +9,79 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFF80D99A),
-    onPrimary = Color(0xFF00391B),
-    primaryContainer = Color(0xFF00522A),
-    onPrimaryContainer = Color(0xFF9BF6B4),
-    secondary = Color(0xFFB5CCB9),
-    onSecondary = Color(0xFF223527),
-    secondaryContainer = Color(0xFF384B3C),
-    onSecondaryContainer = Color(0xFFD1E8D4),
-    tertiary = Color(0xFFA2CEDB),
-    onTertiary = Color(0xFF033540),
-    tertiaryContainer = Color(0xFF204C58),
-    onTertiaryContainer = Color(0xFFBEEAF7),
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
+
+private val BookListDarkColorScheme = darkColorScheme(
+    primary = Color(0xFF80D8FF),
+    onPrimary = Color(0xFF003546),
+    primaryContainer = Color(0xFF004D65),
+    onPrimaryContainer = Color(0xFFC4E7FF),
+    secondary = Color(0xFFB5C9D6),
+    onSecondary = Color(0xFF1F333D),
+    secondaryContainer = Color(0xFF364954),
+    onSecondaryContainer = Color(0xFFD1E5F3),
+    tertiary = Color(0xFFCBC2EB),
+    onTertiary = Color(0xFF332D4D),
+    tertiaryContainer = Color(0xFF494365),
+    onTertiaryContainer = Color(0xFFE8DEFF),
     error = Color(0xFFFFB4AB),
-    onError = Color(0xFF690005),
     errorContainer = Color(0xFF93000A),
+    onError = Color(0xFF690005),
     onErrorContainer = Color(0xFFFFDAD6),
-    background = Color(0xFF191C19),
-    onBackground = Color(0xFFE1E3DE),
-    surface = Color(0xFF191C19),
-    onSurface = Color(0xFFE1E3DE),
-    surfaceVariant = Color(0xFF414941),
-    onSurfaceVariant = Color(0xFFC1C9BF),
-    outline = Color(0xFF8B938A),
-    inverseOnSurface = Color(0xFF191C19),
-    inverseSurface = Color(0xFFE1E3DE),
-    inversePrimary = Color(0xFF006D3B),
-    surfaceTint = Color(0xFF80D99A),
+    background = Color(0xFF191C1E),
+    onBackground = Color(0xFFE1E2E5),
+    surface = Color(0xFF191C1E),
+    onSurface = Color(0xFFE1E2E5),
+    surfaceVariant = Color(0xFF40484D),
+    onSurfaceVariant = Color(0xFFC0C7CD),
+    outline = Color(0xFF8A9297),
+    inverseOnSurface = Color(0xFF191C1E),
+    inverseSurface = Color(0xFFE1E2E5),
+    inversePrimary = Color(0xFF006686),
+    surfaceTint = Color(0xFF80D8FF),
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Color(0xFF006D3B),
+private val BookListLightColorScheme = lightColorScheme(
+    primary = Color(0xFF006686),
     onPrimary = Color(0xFFFFFFFF),
-    primaryContainer = Color(0xFF9BF6B4),
-    onPrimaryContainer = Color(0xFF00210D),
-    secondary = Color(0xFF4F6353),
+    primaryContainer = Color(0xFFC4E7FF),
+    onPrimaryContainer = Color(0xFF001E2B),
+    secondary = Color(0xFF506471),
     onSecondary = Color(0xFFFFFFFF),
-    secondaryContainer = Color(0xFFD1E8D4),
-    onSecondaryContainer = Color(0xFF0D1F13),
-    tertiary = Color(0xFF3A646F),
+    secondaryContainer = Color(0xFFD1E5F3),
+    onSecondaryContainer = Color(0xFF0C1F29),
+    tertiary = Color(0xFF655A7D),
     onTertiary = Color(0xFFFFFFFF),
-    tertiaryContainer = Color(0xFFBEEAF7),
-    onTertiaryContainer = Color(0xFF001F26),
+    tertiaryContainer = Color(0xFFE8DEFF),
+    onTertiaryContainer = Color(0xFF201835),
     error = Color(0xFFBA1A1A),
-    onError = Color(0xFFFFFFFF),
     errorContainer = Color(0xFFFFDAD6),
+    onError = Color(0xFFFFFFFF),
     onErrorContainer = Color(0xFF410002),
-    background = Color(0xFFFBFDF7),
-    onBackground = Color(0xFF191C19),
-    surface = Color(0xFFFBFDF7),
-    onSurface = Color(0xFF191C19),
-    surfaceVariant = Color(0xFFDDE5DB),
-    onSurfaceVariant = Color(0xFF414941),
-    outline = Color(0xFF717971),
-    inverseOnSurface = Color(0xFFF0F1EC),
-    inverseSurface = Color(0xFF2E312E),
-    inversePrimary = Color(0xFF80D99A),
-    surfaceTint = Color(0xFF006D3B),
+    background = Color(0xFFFBFCFE),
+    onBackground = Color(0xFF191C1E),
+    surface = Color(0xFFFBFCFE),
+    onSurface = Color(0xFF191C1E),
+    surfaceVariant = Color(0xFFDCE3E9),
+    onSurfaceVariant = Color(0xFF40484D),
+    outline = Color(0xFF70787D),
+    inverseOnSurface = Color(0xFFEFF1F3),
+    inverseSurface = Color(0xFF2E3133),
+    inversePrimary = Color(0xFF80D8FF),
+    surfaceTint = Color(0xFF006686),
 )
+
+val LocalThemeIsDark = staticCompositionLocalOf { false }
 
 @Composable
 fun BookListTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -83,14 +90,23 @@ fun BookListTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> BookListDarkColorScheme
+        else -> BookListLightColorScheme
+    }
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+        }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    CompositionLocalProvider(LocalThemeIsDark provides darkTheme) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = BookListTypography,
+            shapes = Shapes,
+            content = content
+        )
+    }
 }
