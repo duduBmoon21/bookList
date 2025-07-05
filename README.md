@@ -47,11 +47,11 @@ A sleek, modern Android application built with Jetpack Compose for tracking your
 
 ## 📸 Screenshots
 
-| Add Book Screen                                                                        | Book List                                                                                | Edit Book                                                                                | Confirm Delete                                                                                  |           |           |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------- | --------- |
-| ![Add Book](https://github.com/duduBmoon21/bookList/blob/main/static/add.png?raw=true) | ![Book List](https://github.com/duduBmoon21/bookList/blob/main/static/list.png?raw=true) | ![Edit Book](https://github.com/duduBmoon21/bookList/blob/main/static/edit.png?raw=true) | ![Confirm Delete](https://github.com/duduBmoon21/bookList/blob/main/static/delete.png?raw=true) | Book List | Edit Book |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |                                                                                                 |           |           |
-| ![Add Book](https://github.com/duduBmoon21/bookList/blob/main/static/add.png?raw=true) | ![Book List](https://github.com/duduBmoon21/bookList/blob/main/static/list.png?raw=true) | ![Edit Book](https://github.com/duduBmoon21/bookList/blob/main/static/edit.png?raw=true) |                                                                                                 |           |           |
+| Add Book Screen                                                                        | Book List                                                                                | Edit Book                                                                                | Confirm Delete                                                                                  |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| ![Add Book](https://github.com/duduBmoon21/bookList/blob/main/static/add.png?raw=true) | ![Book List](https://github.com/duduBmoon21/bookList/blob/main/static/list.png?raw=true) | ![Edit Book](https://github.com/duduBmoon21/bookList/blob/main/static/edit.png?raw=true) | ![Confirm Delete](https://github.com/duduBmoon21/bookList/blob/main/static/delete.png?raw=true) |
+
+
 
 ## 🚀 Getting Started
 
@@ -70,6 +70,7 @@ git clone https://github.com/duduBmoon21/bookList.git
 MIT License
 
 ## 🤝 Contributing
+
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
 
