@@ -1,20 +1,24 @@
-# 📚 BookList - Native Android Development (Kotlin & Jetpack Compose) – Workshop Assignment
+# 📚 BookList - Modern Android Book Tracking App
 
-A Modern Android application built with Jetpack Compose for book collection with beautiful Material 3 design.
+A sleek, modern Android application built with Jetpack Compose for tracking your book collection with beautiful Material 3 design.
+
+![App Screenshot](https://github.com/duduBmoon21/bookList/blob/main/static/cover.png?raw=true)
 
 ## ✨ Features
 
-* **Material Design** - Dynamic colors, adaptive theming, and modern UI components
+* **Material You Design** - Dynamic colors, adaptive theming, and modern UI components
 * **Intuitive Book Management** - Add, edit, and remove books with ease
+* **Beautiful Animations** - Smooth transitions and interactive elements
 * **Modern Architecture** - Built with MVVM pattern and Jetpack components
 * **Dark/Light Theme** - Automatic system theme adaptation
 
 ## 💠 Technologies
 
-* Kotlin
+* 100% Kotlin
 * Jetpack Compose
 * Material Design 3
-* ViewModel
+* ViewModel & StateFlow
+* Room Database *(optional - if implemented)*
 
 ## 🎨 UI/UX Highlights
 
@@ -43,9 +47,11 @@ A Modern Android application built with Jetpack Compose for book collection with
 
 ## 📸 Screenshots
 
-| Add Book Screen                                                                        | Book List                                                                                | Edit Book                                                                                |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| ![Add Book](https://github.com/duduBmoon21/bookList/blob/main/static/add.png?raw=true) | ![Book List](https://github.com/duduBmoon21/bookList/blob/main/static/list.png?raw=true) | ![Edit Book](https://github.com/duduBmoon21/bookList/blob/main/static/edit.png?raw=true) |
+| Add Book Screen                                                                        | Book List                                                                                | Edit Book                                                                                | Confirm Delete                                                                                  |           |           |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------- | --------- |
+| ![Add Book](https://github.com/duduBmoon21/bookList/blob/main/static/add.png?raw=true) | ![Book List](https://github.com/duduBmoon21/bookList/blob/main/static/list.png?raw=true) | ![Edit Book](https://github.com/duduBmoon21/bookList/blob/main/static/edit.png?raw=true) | ![Confirm Delete](https://github.com/duduBmoon21/bookList/blob/main/static/delete.png?raw=true) | Book List | Edit Book |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |                                                                                                 |           |           |
+| ![Add Book](https://github.com/duduBmoon21/bookList/blob/main/static/add.png?raw=true) | ![Book List](https://github.com/duduBmoon21/bookList/blob/main/static/list.png?raw=true) | ![Edit Book](https://github.com/duduBmoon21/bookList/blob/main/static/edit.png?raw=true) |                                                                                                 |           |           |
 
 ## 🚀 Getting Started
 
