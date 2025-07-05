@@ -1,4 +1,4 @@
-# 📚 BookList - Modern Android Book Tracking App
+# 📚 BookList - Native Android Development (Kotlin & Jetpack Compose) – Workshop Assignment
 
 A sleek, modern Android application built with Jetpack Compose for tracking your book collection with beautiful Material 3 design.
 
