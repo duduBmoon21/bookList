@@ -14,7 +14,7 @@ A Modern Android application built with Jetpack Compose for book collection with
 * Kotlin
 * Jetpack Compose
 * Material Design 3
-* ViewModel & StateFlow
+* ViewModel
 
 ## 🎨 UI/UX Highlights
 
